@@ -1,4 +1,5 @@
 htmlanalyzer/Application.class
 htmlanalyzer/Config.class
 htmlanalyzer/controller/WelcomeController.class
+htmlanalyzer/model/HtmlAnalysis.class
 htmlanalyzer/controller/HtmlAnalysisController.class
