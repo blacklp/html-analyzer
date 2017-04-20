@@ -1,8 +1,10 @@
-package htmlanalyzer.model;
+package htmlanalyzer.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class HtmlAnalysis {
     private String htmlVersion;
 
@@ -21,6 +23,11 @@ public class HtmlAnalysis {
 
     private boolean containsLoginForm;
 
+    public HtmlAnalysis(String title) {
+        this.title = title;
+    }
+
+    // TODO: Remove since probably won't be used
     public void increaseHeadingCount(int headingLevel) {
         int index = headingLevel - 1;
         int oldCount = numHeadingsByLevel[index];
@@ -34,5 +41,10 @@ public class HtmlAnalysis {
 
     public void increaseExternalLinkCount() {
         numExternalLinks++;
+    }
+
+    public void setHeadingCount(int headingLevel, int count) {
+        int index = headingLevel - 1;
+        numHeadingsByLevel[index] = count;
     }
 }

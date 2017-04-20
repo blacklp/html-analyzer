@@ -1,9 +1,12 @@
 import htmlanalyzer.Application;
-import htmlanalyzer.controller.HtmlAnalysisController;
+import htmlanalyzer.controllers.HtmlAnalysisController;
+import htmlanalyzer.models.HtmlAnalysis;
+import htmlanalyzer.services.HtmlAnalysisService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -11,7 +14,7 @@ import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-@ContextConfiguration(classes = Application.class)
+@ContextConfiguration(classes = { Application.class, HtmlAnalysisService.class })
 public class HtmlAnalysisControllerTest {
     @Autowired
     private HtmlAnalysisController controller;
@@ -21,7 +24,7 @@ public class HtmlAnalysisControllerTest {
         String url = "https://arxiv.org/";
 //        String url = "http://google.com";
 
-        String htmlAnalysis = controller.getHtmlAnalysis(url);
+        ResponseEntity<HtmlAnalysis> htmlAnalysis = controller.getHtmlAnalysis(url);
 
         // TODO: Expect html version "-//W3C//DTD XHTML 1.0 Transitional//EN"
 

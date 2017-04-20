@@ -11,11 +11,10 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ComponentScan(basePackages = {"controller","model"})
+@ComponentScan(basePackages = {"controllers","models","services"})
 @EnableWebMvc
 @PropertySources(value={@PropertySource("classpath:application.properties")})
-@EntityScan(basePackages={"model"})
-
+@EntityScan(basePackages={"models"})
 public class Config extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
