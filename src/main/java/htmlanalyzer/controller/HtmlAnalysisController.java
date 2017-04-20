@@ -16,12 +16,17 @@ public class HtmlAnalysisController {
     public String getHtmlAnalysis(@RequestParam String url) throws IOException {
         // TODO: Move to service:
         Document document = Jsoup.connect(url).get();
+        String title = document.title();
+
         List<Node> nodes = document.childNodes();
+        String htmlVersion;
 
         for (Node node : nodes) {
             if (node instanceof DocumentType) {
                 DocumentType documentType = (DocumentType)node;
-                String htmlVersion = documentType.toString();
+//                String htmlVersion = documentType.toString();
+                String publicId = documentType.attr("publicid");
+                htmlVersion = publicId.equals("") ? "HTML5" : publicId;
             }
         }
 
