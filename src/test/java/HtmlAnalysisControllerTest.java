@@ -2,6 +2,7 @@ import htmlanalyzer.Application;
 import htmlanalyzer.controllers.HtmlAnalysisController;
 import htmlanalyzer.models.HtmlAnalysis;
 import htmlanalyzer.services.HtmlAnalysisService;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,26 @@ public class HtmlAnalysisControllerTest {
     private HtmlAnalysisController controller;
 
     @Test
-    public void getHtmlAnalysis() throws IOException {
+    public void getHtmlAnalysisForArxiv() throws IOException {
         String url = "https://arxiv.org/";
-//        String url = "http://google.com";
 
-        ResponseEntity<HtmlAnalysis> htmlAnalysis = controller.getHtmlAnalysis(url);
+        ResponseEntity<HtmlAnalysis> response = controller.getHtmlAnalysis(url);
+        HtmlAnalysis htmlAnalysis = response.getBody();
 
-        // TODO: Expect html version "-//W3C//DTD XHTML 1.0 Transitional//EN"
-
+        Assertions.assertThat(htmlAnalysis.getHtmlVersion()).isEqualTo("-//W3C//DTD XHTML 1.0 Transitional//EN");
         // TODO: Maybe extract text after DTD, i.e. XHTML 1.0 and e.g. in case PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> then return HTML 4.01
 
-        // TODO: Expect title "arXiv.org e-Print archive"
+        Assertions.assertThat(htmlAnalysis.getTitle()).isEqualTo("arXiv.org e-Print archive");
+    }
+
+    @Test
+    public void getHtmlAnalysisForGoogle() throws IOException {
+        String url = "http://google.com";
+
+        ResponseEntity<HtmlAnalysis> response = controller.getHtmlAnalysis(url);
+        HtmlAnalysis htmlAnalysis = response.getBody();
+
+        Assertions.assertThat(htmlAnalysis.getHtmlVersion()).isEqualTo("HTML5");
+        Assertions.assertThat(htmlAnalysis.getTitle()).isEqualTo("Google");
     }
 }
