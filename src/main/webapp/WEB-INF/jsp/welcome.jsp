@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-
-<html lang="en">
-
-<body>
-    <form:form action="/html/analysis" method="get" modelAttribute="url">
-        <div>
-            <form:label path="url">URL:</form:label>
-            <form:input path="url"/><br/><br/>
-        </div>
-	    <div>
-	        <input type="submit" name="send" value="Submit"/>
-	    </div>
-	</form>
-</body>
-
+<html>
+    <head></head>
+    <body>
+        <form id="welcomeForm" method="GET" action="Javascript:submit(url)">
+            URL: <input type="text" id="url" name="url"/>
+            <br/><br/>
+            <input type="submit" name="send" value="Submit"/>
+        </form>
+        <script>
+            function submit(url) {
+                window.location.href = '/html/analysis?url=' + url.value;
+            }
+        </script>
+    </body>
 </html>

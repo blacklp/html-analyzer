@@ -21,7 +21,7 @@ public class HtmlAnalysisControllerTest {
     private HtmlAnalysisController controller;
 
     @Test
-    public void getHtmlAnalysisForArxiv() throws IOException {
+    public void postHtmlAnalysisForArxiv() throws IOException {
         String url = "https://arxiv.org/";
 
         ResponseEntity<HtmlAnalysis> response = controller.getHtmlAnalysis(url);
@@ -31,10 +31,18 @@ public class HtmlAnalysisControllerTest {
         // TODO: Maybe extract text after DTD, i.e. XHTML 1.0 and e.g. in case PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> then return HTML 4.01
 
         Assertions.assertThat(htmlAnalysis.getTitle()).isEqualTo("arXiv.org e-Print archive");
+
+        int[] numHeadings = htmlAnalysis.getNumHeadingsByLevel();
+        Assertions.assertThat(numHeadings[0]).isEqualTo(1); // H1
+        Assertions.assertThat(numHeadings[1]).isEqualTo(7); // H2
+        Assertions.assertThat(numHeadings[2]).isEqualTo(0); // H3
+        Assertions.assertThat(numHeadings[3]).isEqualTo(0); // H4
+        Assertions.assertThat(numHeadings[4]).isEqualTo(0); // H5
+        Assertions.assertThat(numHeadings[5]).isEqualTo(0); // H6
     }
 
     @Test
-    public void getHtmlAnalysisForGoogle() throws IOException {
+    public void postHtmlAnalysisForGoogle() throws IOException {
         String url = "http://google.com";
 
         ResponseEntity<HtmlAnalysis> response = controller.getHtmlAnalysis(url);
