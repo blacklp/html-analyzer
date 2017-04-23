@@ -52,9 +52,8 @@ public class HtmlAnalysisService {
     }
 
     private boolean extractContainsLoginForm(Document document) {
-        Elements inputs = document.select("input[type=password]");
-        System.out.println(inputs.size());
-        return false;
+        Elements passwordInputs = document.select("input[type=password]");
+        return !passwordInputs.isEmpty();
     }
 
     private String extractHtmlVersion(Document document) {
