@@ -1,6 +1,7 @@
+package htmlanalyzer.services;
+
 import htmlanalyzer.Application;
 import htmlanalyzer.models.HtmlAnalysis;
-import htmlanalyzer.services.HtmlAnalysisService;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

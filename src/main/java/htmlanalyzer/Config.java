@@ -23,6 +23,6 @@ public class Config extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureViewResolvers(final ViewResolverRegistry registry) {
-        registry.jsp("WEB-INF/jsp/", ".jsp");
+        registry.jsp("/WEB-INF/jsp/", ".jsp");
     }
 }
