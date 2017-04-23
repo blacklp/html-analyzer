@@ -112,4 +112,27 @@ public class HtmlAnalysisServiceTest {
 
         Assertions.assertThat(htmlAnalysis.isContainsLoginForm()).isFalse();
     }
+
+    @Test
+    public void getAnalysisForSpiegelLogin() throws IOException, URISyntaxException {
+        String url = "https://www.spiegel.de/meinspiegel/login.html";
+
+        HtmlAnalysis htmlAnalysis= service.getAnalysis(url);
+
+        Assertions.assertThat(htmlAnalysis.getHtmlVersion()).isEqualTo("HTML 4.01 Transitional");
+        Assertions.assertThat(htmlAnalysis.getTitle()).isEqualTo("Mein SPIEGEL - SPIEGEL ONLINE");
+
+        int[] numHeadings = htmlAnalysis.getNumHeadingsByLevel();
+        Assertions.assertThat(numHeadings[0]).isEqualTo(1); // H1
+        Assertions.assertThat(numHeadings[1]).isEqualTo(1); // H2
+        Assertions.assertThat(numHeadings[2]).isEqualTo(0); // H3
+        Assertions.assertThat(numHeadings[3]).isEqualTo(2); // H4
+        Assertions.assertThat(numHeadings[4]).isEqualTo(5); // H5
+        Assertions.assertThat(numHeadings[5]).isEqualTo(0); // H6
+
+        Assertions.assertThat(htmlAnalysis.getNumExternalLinks()).isEqualTo(0);
+        Assertions.assertThat(htmlAnalysis.getNumInternalLinks()).isEqualTo(273);
+
+        Assertions.assertThat(htmlAnalysis.isContainsLoginForm()).isTrue();
+    }
 }
