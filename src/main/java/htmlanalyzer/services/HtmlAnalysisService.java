@@ -12,12 +12,13 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Service
 public class HtmlAnalysisService {
     public HtmlAnalysis getAnalysis(String url) throws IOException, URISyntaxException {
-        Document document = Jsoup.connect(url).get();
+        Document document = Jsoup.parse(new java.net.URL(url).openStream(), "UTF-8", url);
         String title = document.title();
 
         HtmlAnalysis htmlAnalysis = new HtmlAnalysis(title);
@@ -31,7 +32,7 @@ public class HtmlAnalysisService {
 
         for (Element link : links) {
             String href = link.attr("href");
-            URI hrefUri = new URI(href);
+            URI hrefUri = new URI(URLEncoder.encode(href, "UTF-8"));
             boolean isInternal = !hrefUri.isAbsolute() || href.contains(host);
             if (isInternal) {
                 htmlAnalysis.increaseInternalLinkCount();
