@@ -10,11 +10,13 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Service
 public class HtmlAnalysisService {
-    public HtmlAnalysis getAnalysis(String url) throws IOException {
+    public HtmlAnalysis getAnalysis(String url) throws IOException, URISyntaxException { // TODO: Try-catch ??
         Document document = Jsoup.connect(url).get();
         String title = document.title();
 
@@ -24,9 +26,18 @@ public class HtmlAnalysisService {
         htmlAnalysis.setHtmlVersion(htmlVersion);
 
         Elements links = document.select("a[href]");
+        URI uri = new URI(url);
+        String host = uri.getHost();
 
         for (Element link : links) {
-//            link. TODO: separate between internal and external
+            String href = link.attr("href");
+            URI hrefUri = new URI(href);
+            boolean isInternal = !hrefUri.isAbsolute() || href.contains(host);
+            if (isInternal) {
+                htmlAnalysis.increaseInternalLinkCount();
+            } else {
+                htmlAnalysis.increaseExternalLinkCount();
+            }
         }
 
         for (int headingLevel = 1; headingLevel <= 6; headingLevel++) {
@@ -34,7 +45,16 @@ public class HtmlAnalysisService {
             htmlAnalysis.setHeadingCount(headingLevel, headings.size());
         }
 
+        boolean containsLogin = extractContainsLoginForm(document);
+        htmlAnalysis.setContainsLoginForm(containsLogin);
+
         return htmlAnalysis;
+    }
+
+    private boolean extractContainsLoginForm(Document document) {
+        Elements inputs = document.select("input[type=password]");
+        System.out.println(inputs.size());
+        return false;
     }
 
     private String extractHtmlVersion(Document document) {

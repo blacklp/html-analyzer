@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 @RestController
 public class HtmlAnalysisController {
@@ -16,41 +17,43 @@ public class HtmlAnalysisController {
     private HtmlAnalysisService htmlAnalysisService;
 
     @GetMapping("/html/analysis")
-    public String getHtmlAnalysis(@RequestParam String url) throws IOException {
+    public String getHtmlAnalysis(@RequestParam String url) throws IOException, URISyntaxException { // TODO MAke service handle it
         HtmlAnalysis htmlAnalysis = htmlAnalysisService.getAnalysis(url);
-        return "<html>" +
-                    "<head><title>HTML Analysis Result</title></head>" +
+        StringBuilder html = new StringBuilder();
+        html.append(
+            "<html>" +
+                "<head><title>HTML Analysis Result</title></head>" +
                     "<body>" +
                         "<h1>HTML Analysis for Page: " + url + "</h1><br/><br/>" +
-                        "<table>" +
-                            "<tr>" +
-                                "<th>HTML Version</th>" +
-                                "<th>Page Title</th>" +
-                                "<th>Number of headings H1</th>" +
-                                "<th>Number of headings H2</th>" +
-                                "<th>Number of headings H3</th>" +
-                                "<th>Number of headings H4</th>" +
-                                "<th>Number of headings H5</th>" +
-                                "<th>Number of headings H6</th>" +
-                                "<th>Number of Internal Links</th>" +
-                                "<th>Number of External Links</th>" +
-                                "<th>Contains Login Form</th>" +
-                            "</tr>" +
-                            "<tr>" +
-                                "<td>" + htmlAnalysis.getHtmlVersion() + "</td>" +
-                                "<td>" + htmlAnalysis.getTitle() + "</td>" +
-                                "<td>" + htmlAnalysis.getNumHeadingsByLevel()[0] + "</td>" +
-                                "<td>" + htmlAnalysis.getNumHeadingsByLevel()[1] + "</td>" +
-                                "<td>" + htmlAnalysis.getNumHeadingsByLevel()[2] + "</td>" +
-                                "<td>" + htmlAnalysis.getNumHeadingsByLevel()[3] + "</td>" +
-                                "<td>" + htmlAnalysis.getNumHeadingsByLevel()[4] + "</td>" +
-                                "<td>" + htmlAnalysis.getNumHeadingsByLevel()[5] + "</td>" +
-                                "<td>" + htmlAnalysis.getNumInternalLinks() + "</td>" +
-                                "<td>" + htmlAnalysis.getNumExternalLinks() + "</td>" +
-                                "<td>" + htmlAnalysis.isContainsLoginForm() + "</td>" +
-                            "</tr>" +
-                        "</table>" +
-                    "</body>" +
-                "</html>";
+                        "<table border='1'>" +
+                            "<tr>" + "<th>HTML Version</th>" + "<th>Page Title</th>");
+
+        int[] headings = htmlAnalysis.getNumHeadingsByLevel();
+
+        for (int i = 0; i < headings.length; i++) {
+            html.append("<th>Num H" + (i + 1) + "</th>");
+        }
+
+        html.append(
+                "<th>Num Internal Links</th>" +
+                "<th>Num External Links</th>" +
+                "<th>Has Login</th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td>" + htmlAnalysis.getHtmlVersion() + "</td>" +
+                "<td>" + htmlAnalysis.getTitle() + "</td>");
+
+        for (int i = 0; i < headings.length; i++) {
+            html.append("<td>" + htmlAnalysis.getNumHeadingsByLevel()[i] + "</td>");
+        }
+
+        html.append(
+                "<td>" + htmlAnalysis.getNumInternalLinks() + "</td>" +
+                "<td>" + htmlAnalysis.getNumExternalLinks() + "</td>" +
+                "<td>" + htmlAnalysis.isContainsLoginForm() + "</td>");
+        html.append("</tr>" + "</table>" + "</body>" + "</html>");
+
+        return html.toString();
+
     }
 }

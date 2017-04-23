@@ -27,14 +27,6 @@ public class HtmlAnalysis {
         this.title = title;
     }
 
-    // TODO: Remove since probably won't be used
-    public void increaseHeadingCount(int headingLevel) {
-        int index = headingLevel - 1;
-        int oldCount = numHeadingsByLevel[index];
-        numHeadingsByLevel[index] = oldCount + 1;
-//        numHeadingsByLevel[index]++; FIXME: Would it work?
-    }
-
     public void increaseInternalLinkCount() {
         numInternalLinks++;
     }

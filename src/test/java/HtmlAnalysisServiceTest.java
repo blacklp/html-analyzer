@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -19,7 +20,7 @@ public class HtmlAnalysisServiceTest {
     private HtmlAnalysisService service;
 
     @Test
-    public void postHtmlAnalysisForArxiv() throws IOException {
+    public void postHtmlAnalysisForArxiv() throws IOException, URISyntaxException {
         String url = "https://arxiv.org/";
 
         HtmlAnalysis htmlAnalysis = service.getAnalysis(url);
@@ -39,7 +40,7 @@ public class HtmlAnalysisServiceTest {
     }
 
     @Test
-    public void postHtmlAnalysisForGoogle() throws IOException {
+    public void postHtmlAnalysisForGoogle() throws IOException, URISyntaxException {
         String url = "http://google.com";
 
         HtmlAnalysis htmlAnalysis= service.getAnalysis(url);
