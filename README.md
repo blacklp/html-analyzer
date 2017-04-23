@@ -1,4 +1,4 @@
-# HTMl Analyzer
+# HTML Analyzer
 
 This project is a web application that allows a user to input a url and display a report regarding the content of the url.
 The report contains the following fields:
@@ -21,7 +21,14 @@ mvn spring-boot:run
 ```
 mvn clean install
 ```
+- Open http://localhost:8080/ on a web browser in order to use the program
 
 ## Assumptions:
+Some assumptions have been made in order to make the analysis a bit easier. For example, this program considers login forms in which an input of type "password" is used.
 
-## Limitations:
+## Limitations and future work:
+During testing it has been observed that some urls such as https://www.spiegel.de/meinspiegel/login.html don't work correctly with this project. Concretely this fails with the following error message: 
+
+`Illegal character in path at index 96: /wirtschaft/service/versicherung-check-fuer-haftpflicht-hausrat-berufsunfaehigkeit-a-960380.html`.
+
+The exact reason why this happens is not yet clear and needs to be further investigated.
