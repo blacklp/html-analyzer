@@ -3,7 +3,8 @@
 <html>
     <head><title>HTML Analyzer</title></head>
     <body>
-        <h1>Welcome to the HTML Analyzer</h1><br/><br/>
+        <h1>Welcome to the HTML Analyzer</h1>
+        <p>Please enter a valid url in order to get an HTML analysis</p><br/><br/>
         <form:form method="GET" action="/html/analysis" modelAttribute="url">
             URL: <form:input path="url"/>
             <br/><br/>

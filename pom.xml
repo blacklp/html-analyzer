@@ -19,38 +19,14 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
             <version>8.5.13</version>
-            <!--<scope>provided</scope>-->
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet.jsp</groupId>-->
-            <!--<artifactId>jsp-api</artifactId>-->
-            <!--<version>2.2</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
 
         <!-- JSTL for JSP -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-            <!--<scope>provided</scope>-->
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.security</groupId>-->
-            <!--<artifactId>spring-security-taglibs</artifactId>-->
-            <!--<version>4.2.2.RELEASE</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-
-        <!-- Need this to compile JSP -->
-        <!--<dependency>-->
-            <!--<groupId>org.eclipse.jdt.core.compiler</groupId>-->
-            <!--<artifactId>ecj</artifactId>-->
-            <!--<version>4.6.1</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -65,36 +41,12 @@
         </dependency>
 
         <!-- Testing -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>1.5.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.jayway.jsonpath</groupId>-->
-            <!--<artifactId>json-path</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--<version>1.5.2.RELEASE</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-
-        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
-            <!--&lt;!&ndash;<groupId>javax.servlet</groupId>&ndash;&gt;-->
-            <!--&lt;!&ndash;<artifactId>jstl</artifactId>&ndash;&gt;-->
-            <!--&lt;!&ndash;<version>1.2</version>&ndash;&gt;-->
-        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
-
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>javax.servlet-api</artifactId>-->
-            <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
