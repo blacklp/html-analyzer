@@ -27,8 +27,4 @@ mvn clean install
 Some assumptions have been made in order to make the analysis a bit easier. For example, this program considers login forms in which an input of type "password" is used.
 
 ## Limitations and future work:
-During testing it has been observed that some urls such as https://www.spiegel.de/meinspiegel/login.html don't work correctly with this project. Concretely this fails with the following error message: 
-
-`Illegal character in path at index 96: /wirtschaft/service/versicherung-check-fuer-haftpflicht-hausrat-berufsunfaehigkeit-a-960380.html`.
-
-The exact reason why this happens is not yet clear and needs to be further investigated.
+As future work I would like to change a little bit the implementation of the "has login form" detection. Concretely, I would like to make sure that the password input field belongs to a form that only contains two inputs: one is the password input and the other one is the user name or email. In this way, I would be able to distinguish between a login form and registration form.
