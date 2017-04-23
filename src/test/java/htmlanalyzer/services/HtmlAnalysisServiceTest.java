@@ -38,8 +38,8 @@ public class HtmlAnalysisServiceTest {
         Assertions.assertThat(numHeadings[4]).isEqualTo(0); // H5
         Assertions.assertThat(numHeadings[5]).isEqualTo(0); // H6
 
-        Assertions.assertThat(htmlAnalysis.getNumExternalLinks()).isEqualTo(9);
-        Assertions.assertThat(htmlAnalysis.getNumInternalLinks()).isEqualTo(238);
+        Assertions.assertThat(htmlAnalysis.getNumExternalLinks()).isEqualTo(0);
+        Assertions.assertThat(htmlAnalysis.getNumInternalLinks()).isEqualTo(247);
 
         Assertions.assertThat(htmlAnalysis.isContainsLoginForm()).isFalse();
     }
@@ -61,8 +61,8 @@ public class HtmlAnalysisServiceTest {
         Assertions.assertThat(numHeadings[4]).isEqualTo(0); // H5
         Assertions.assertThat(numHeadings[5]).isEqualTo(0); // H6
 
-        Assertions.assertThat(htmlAnalysis.getNumExternalLinks()).isEqualTo(7);
-        Assertions.assertThat(htmlAnalysis.getNumInternalLinks()).isEqualTo(13);
+        Assertions.assertThat(htmlAnalysis.getNumExternalLinks()).isEqualTo(0);
+        Assertions.assertThat(htmlAnalysis.getNumInternalLinks()).isEqualTo(20);
 
         Assertions.assertThat(htmlAnalysis.isContainsLoginForm()).isFalse();
     }
