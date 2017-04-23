@@ -17,7 +17,7 @@ public class HtmlAnalysisController {
     private HtmlAnalysisService htmlAnalysisService;
 
     @GetMapping("/html/analysis")
-    public String getHtmlAnalysis(@RequestParam String url) throws IOException, URISyntaxException { // TODO MAke service handle it
+    public String getHtmlAnalysis(@RequestParam String url) throws IOException, URISyntaxException {
         HtmlAnalysis htmlAnalysis = htmlAnalysisService.getAnalysis(url);
         StringBuilder html = new StringBuilder();
         html.append(

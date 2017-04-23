@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 public class HtmlAnalysisService {
-    public HtmlAnalysis getAnalysis(String url) throws IOException, URISyntaxException { // TODO: Try-catch ??
+    public HtmlAnalysis getAnalysis(String url) throws IOException, URISyntaxException {
         Document document = Jsoup.connect(url).get();
         String title = document.title();
 
@@ -63,7 +63,12 @@ public class HtmlAnalysisService {
             if (node instanceof DocumentType) {
                 DocumentType documentType = (DocumentType)node;
                 String publicId = documentType.attr("publicid");
-                return publicId.equals("") ? "HTML5" : publicId;
+                if (publicId.equals("")) {
+                    return "HTML 5";
+                }
+                String[] split = publicId.split("//");
+
+                return split.length < 3 ? "" : split[2].replace("DTD", "").trim();
             }
         }
         return "";
